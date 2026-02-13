@@ -176,4 +176,84 @@ function confettiBurst(){
     document.body.appendChild(d);
 
     const dur = 1200 + Math.random()*900;
-    const drift = (Math.random
+    const drift = (Math.random()*2 - 1) * 140;
+
+    d.animate([
+      { transform:"translate(0,0) rotate(0deg)", opacity: 1 },
+      { transform:`translate(${drift}px, 105vh) rotate(${420+Math.random()*360}deg)`, opacity: 0.05 }
+    ], { duration: dur, easing:"cubic-bezier(.2,.8,.2,1)" });
+
+    setTimeout(()=> d.remove(), dur+50);
+  }
+}
+
+// ====== falling hearts/petals canvas ======
+const canvas = document.getElementById("fx");
+const ctx = canvas.getContext("2d");
+function resize(){
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+window.addEventListener("resize", resize);
+resize();
+
+const items = Array.from({length: 48}, () => ({
+  x: Math.random()*canvas.width,
+  y: -Math.random()*canvas.height,
+  s: 10 + Math.random()*18,
+  sp: 0.6 + Math.random()*1.4,
+  wob: Math.random()*Math.PI*2,
+  kind: Math.random() > 0.55 ? "heart" : "petal",
+  rot: Math.random()*Math.PI*2
+}));
+
+function drawHeart(x,y,size){
+  ctx.save();
+  ctx.translate(x,y);
+  ctx.rotate(Math.sin(size)*0.2);
+  ctx.scale(size/24, size/24);
+  ctx.fillStyle = Math.random()>0.5 ? "rgba(255,59,122,.75)" : "rgba(255,122,168,.75)";
+  ctx.beginPath();
+  ctx.moveTo(0, 8);
+  ctx.bezierCurveTo(0, 0, -12, 0, -12, 8);
+  ctx.bezierCurveTo(-12, 16, 0, 20, 0, 26);
+  ctx.bezierCurveTo(0, 20, 12, 16, 12, 8);
+  ctx.bezierCurveTo(12, 0, 0, 0, 0, 8);
+  ctx.closePath();
+  ctx.fill();
+  ctx.restore();
+}
+
+function drawPetal(x,y,size,rot){
+  ctx.save();
+  ctx.translate(x,y);
+  ctx.rotate(rot);
+  ctx.fillStyle = "rgba(255,170,200,.75)";
+  ctx.beginPath();
+  ctx.ellipse(0,0, size*0.55, size*0.9, 0, 0, Math.PI*2);
+  ctx.fill();
+  ctx.restore();
+}
+
+function tick(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  for(const p of items){
+    p.y += p.sp*2.2;
+    p.x += Math.sin(p.wob) * 0.6;
+    p.wob += 0.02;
+    p.rot += 0.02;
+
+    if(p.kind === "heart") drawHeart(p.x, p.y, p.s);
+    else drawPetal(p.x, p.y, p.s, p.rot);
+
+    if(p.y > canvas.height + 40){
+      p.y = -40;
+      p.x = Math.random()*canvas.width;
+    }
+  }
+  requestAnimationFrame(tick);
+}
+tick();
+
+// init slide
+renderSlide();
