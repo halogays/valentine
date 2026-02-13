@@ -4,24 +4,24 @@ const FORMSPREE_ENDPOINT = "https://formspree.io/f/mdaleqal";
 // ====== SLIDES (bisa kamu edit kata-katanya) ======
 const slides = [
   {
-    title: `happy valentine's dayy <span class="accent">kezia</span>!! 💘`,
-    body: `eits jangan skip 😤\naku ada sesuatu dikit wkwk`
+    title: `happy valentine's dayy yaaa <span class="accent">kezia</span>!! 💘`,
+    body: `eii sebentarr\naku ada sesuatu dikit wkwk`
   },
   {
-    title: `sebenernya…`,
-    body: `aku tuh tiap liat kamu tuh\nkayak: “lah kok bisa ya orang se-oke ini ada” 😭💗`
+    title: `jujur ni`,
+    body: `aku liat kamu ko\nkayak: “ko dia makin hari makin cakep yh” `
   },
   {
-    title: `serius deh`,
-    body: `hari ini aku cuma mau bilang:\nmakasih ya… beneran.`
+    title: `samting samting`,
+    body: `hei makasi ya km uda mewarnai hari-hari aku wkwkw:\nkalo gaada kamu ma lentera rating 3/10 aja inii, karna ada kamu langsung naik jadi 7/10. makasi banyak yaah.`
   },
   {
-    title: `bentar lagi last`,
-    body: `tap lagi...\nabis itu ada pertanyaan 😛`
+    title: `bentar dikit lagi`,
+    body: `dipencet terus yh.awas aja malas.\nabis itu ada pertanyaan 😛`
   },
   {
-    title: `oke terakhir`,
-    body: `habis ini jawab ya\nbiar aku tau wkwk`
+    title: `adaa pertanyaan nii`,
+    body: `jangan ngga dijawab yh\nbiar aku tau ni wkwk`
   }
 ];
 
