@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <title>Valentine 💘</title>
+  <style>
+    body{
+      font-family: Arial;
+      background: pink;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      height:100vh;
+    }
+    .card{
+      background:white;
+      padding:20px;
+      border-radius:20px;
+      width:90%;
+      max-width:400px;
+      text-align:center;
+    }
+    input, textarea{
+      width:100%;
+      margin-top:10px;
+      padding:10px;
+      border-radius:10px;
+      border:1px solid #ccc;
+    }
+    button{
+      margin-top:15px;
+      width:100%;
+      padding:12px;
+      border:none;
+      border-radius:10px;
+      background:red;
+      color:white;
+      font-weight:bold;
+    }
+  </style>
+</head>
+<body>
+
+<div class="card">
+  <h2>Selamat Hari Valentine 💖</h2>
+  <p>Pertanyaan:</p>
+  <b>“esat apa yang kamu mau?”</b>
+
+  <!-- GANTI LINK DI SINI -->
+  <form action="https://formspree.io/f/mdaleqal" method="POST">
+
+    <input type="text" name="from" placeholder="Nama kamu" required>
+
+    <textarea name="answer" placeholder="Jawaban kamu..." required></textarea>
+
+    <button type="submit">Kirim 💌</button>
+
+  </form>
+</div>
+
+</body>
+</html>
