@@ -6,8 +6,9 @@
   <title>Valentine buat Kezia 💘</title>
   <link rel="stylesheet" href="style.css" />
 </head>
-<body>
-  <!-- efek jatuh -->
+
+<!-- ✅ lock = biar gabisa scroll sebelum tap selesai -->
+<body class="lock">
   <canvas id="fx" aria-hidden="true"></canvas>
 
   <main class="wrap">
@@ -17,9 +18,8 @@
     </div>
 
     <!-- SLIDE AREA -->
-    <section class="stage">
+    <section class="stage" id="stage">
       <div class="stickers" aria-hidden="true">
-        <!-- kalender lucu -->
         <div class="sticker cardSticker">
           <div class="cal">
             <div class="calTop">FEB</div>
@@ -28,10 +28,8 @@
           </div>
         </div>
 
-        <!-- kucing -->
         <div class="sticker catSticker">🐱💕</div>
 
-        <!-- bingkai foto opsional -->
         <div class="sticker photoSticker">
           <div class="photoFrame">
             <div class="photoTitle">kita 🫶</div>
@@ -40,9 +38,7 @@
         </div>
       </div>
 
-      <div class="slide" id="slide">
-        <!-- isi slide di-generate JS -->
-      </div>
+      <div class="slide" id="slide"></div>
 
       <div class="nav">
         <button id="prevBtn" class="btn ghost" type="button">← balik</button>
@@ -52,7 +48,7 @@
       <div class="dots" id="dots" aria-hidden="true"></div>
     </section>
 
-    <!-- FORM -->
+    <!-- FORM (hidden dulu, kebuka setelah tap terakhir) -->
     <section class="card hidden" id="formCard">
       <h2 class="h2">Oke now jujur ya 😛</h2>
       <p class="muted">“esat apa yang kamu mau?”</p>
@@ -74,11 +70,7 @@
     <footer class="foot">made with 💘 for Kezia</footer>
   </main>
 
-  <!-- audio kecil (opsional, bisa dimatiin) -->
-  <audio id="bgm" loop>
-    <!-- kalau mau pake musik, taro file mp3 di repo lalu ganti src di bawah -->
-    <!-- <source src="music.mp3" type="audio/mpeg"> -->
-  </audio>
+  <audio id="bgm" loop></audio>
 
   <script src="script.js"></script>
 </body>
