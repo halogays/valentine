@@ -1,73 +1,84 @@
-
 <!doctype html>
 <html lang="id">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Happy Valentine's Day 💘</title>
+  <title>Valentine buat Kezia 💘</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="hearts" aria-hidden="true"></div>
+  <!-- efek jatuh -->
+  <canvas id="fx" aria-hidden="true"></canvas>
 
-  <!-- Letter Modal -->
-  <div class="modal" id="letterModal" role="dialog" aria-modal="true" aria-labelledby="letterTitle">
-    <div class="modalCard">
-      <div class="envelope">
-        <div class="envTop"></div>
-        <div class="envBody"></div>
-        <div class="letter">
-          <h2 id="letterTitle">Buat kamu 💌</h2>
+  <main class="wrap">
+    <div class="topbar">
+      <div class="pill">💗 14 Feb vibes</div>
+      <button class="pill ghost" id="musicBtn" type="button">🔊 on/off</button>
+    </div>
 
-          <!-- ✅ ISI SURAT KAMU DI SINI -->
-          <p class="letterText" id="letterText">
-            (Tulis pesan kamu di sini ya. Bisa panjang, bisa romantis, bisa lucu.)
-          </p>
+    <!-- SLIDE AREA -->
+    <section class="stage">
+      <div class="stickers" aria-hidden="true">
+        <!-- kalender lucu -->
+        <div class="sticker cardSticker">
+          <div class="cal">
+            <div class="calTop">FEB</div>
+            <div class="calNum">14</div>
+            <div class="calHeart">💖</div>
+          </div>
+        </div>
 
-          <div class="letterSign">
-            <span>—</span>
-            <span id="senderName">Seseorang</span>
+        <!-- kucing -->
+        <div class="sticker catSticker">🐱💕</div>
+
+        <!-- bingkai foto opsional -->
+        <div class="sticker photoSticker">
+          <div class="photoFrame">
+            <div class="photoTitle">kita 🫶</div>
+            <div class="photoHint">kalau mau foto, edit di HTML ya</div>
           </div>
         </div>
       </div>
 
-      <button class="primary" id="openBtn">Buka surat 💌</button>
-      <button class="ghost" id="skipBtn">ehem ada pertanyaan ni, tolong dijawab yb</button>
-    </div>
-  </div>
-  
-  <!-- Main Page -->
-  <main class="wrap">
-    <header class="hero">
-      <div class="badge">💘 Valentine Day</div>
-      <h1>Selamat Hari Valentine, <span class="name">Kezia</span> ✨</h1>
-      <p class="sub">aku mau nanyaa sesuatuu…</p>
-    </header>
-
-    <section class="card">
-      <div class="qbox">
-        <div class="qtitle">Pertanyaan</div>
-        <div class="qtext">“kira kira harus ngasi apa yh ke km?”</div>
+      <div class="slide" id="slide">
+        <!-- isi slide di-generate JS -->
       </div>
 
+      <div class="nav">
+        <button id="prevBtn" class="btn ghost" type="button">← balik</button>
+        <button id="nextBtn" class="btn primary" type="button">tap <3</button>
+      </div>
+
+      <div class="dots" id="dots" aria-hidden="true"></div>
+    </section>
+
+    <!-- FORM -->
+    <section class="card hidden" id="formCard">
+      <h2 class="h2">Oke now jujur ya 😛</h2>
+      <p class="muted">“esat apa yang kamu mau?”</p>
+
       <form id="valForm" class="form">
-        <label>Nama kamu</label>
-        <input name="from" id="from" type="text" placeholder="Tulis nama kamu..." maxlength="40" required />
+        <label>nama kamu</label>
+        <input name="from" id="from" placeholder="misal: Adit" maxlength="40" required />
 
-        <label>Jawaban kamu</label>
-        <textarea name="answer" id="answer" placeholder="Tulis jawaban kamu..." maxlength="500" required></textarea>
+        <label>jawaban kamu</label>
+        <textarea name="answer" id="answer" placeholder="tulis di sini..." maxlength="500" required></textarea>
 
-        <button class="primary" id="sendBtn" type="submit">Kirim 💌</button>
+        <button class="btn primary" id="sendBtn" type="submit">kirim 💌</button>
         <p class="status" id="status" role="status"></p>
       </form>
 
-      <div class="mini">
-        <button class="ghost" id="reopenLetter">Buka surat lagi</button>
-      </div>
+      <button class="btn ghost" id="backToSlides" type="button">← balik ke slide</button>
     </section>
 
-    <footer class="footer">Made with 💖</footer>
+    <footer class="foot">made with 💘 for Kezia</footer>
   </main>
+
+  <!-- audio kecil (opsional, bisa dimatiin) -->
+  <audio id="bgm" loop>
+    <!-- kalau mau pake musik, taro file mp3 di repo lalu ganti src di bawah -->
+    <!-- <source src="music.mp3" type="audio/mpeg"> -->
+  </audio>
 
   <script src="script.js"></script>
 </body>
