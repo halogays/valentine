@@ -1,62 +1,74 @@
+
 <!doctype html>
 <html lang="id">
 <head>
-  <meta charset="utf-8">
-  <title>Valentine 💘</title>
-  <style>
-    body{
-      font-family: Arial;
-      background: pink;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      height:100vh;
-    }
-    .card{
-      background:white;
-      padding:20px;
-      border-radius:20px;
-      width:90%;
-      max-width:400px;
-      text-align:center;
-    }
-    input, textarea{
-      width:100%;
-      margin-top:10px;
-      padding:10px;
-      border-radius:10px;
-      border:1px solid #ccc;
-    }
-    button{
-      margin-top:15px;
-      width:100%;
-      padding:12px;
-      border:none;
-      border-radius:10px;
-      background:red;
-      color:white;
-      font-weight:bold;
-    }
-  </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Happy Valentine's Day 💘</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <div class="hearts" aria-hidden="true"></div>
 
-<div class="card">
-  <h2>Selamat Hari Valentine 💖</h2>
-  <p>Pertanyaan:</p>
-  <b>“esat apa yang kamu mau?”</b>
+  <!-- Letter Modal -->
+  <div class="modal" id="letterModal" role="dialog" aria-modal="true" aria-labelledby="letterTitle">
+    <div class="modalCard">
+      <div class="envelope">
+        <div class="envTop"></div>
+        <div class="envBody"></div>
+        <div class="letter">
+          <h2 id="letterTitle">Buat kamu 💌</h2>
 
-  <!-- GANTI LINK DI SINI -->
-  <form action="https://formspree.io/f/mdaleqal" method="POST">
+          <!-- ✅ ISI SURAT KAMU DI SINI -->
+          <p class="letterText" id="letterText">
+            (Tulis pesan kamu di sini ya. Bisa panjang, bisa romantis, bisa lucu.)
+          </p>
 
-    <input type="text" name="from" placeholder="Nama kamu" required>
+          <div class="letterSign">
+            <span>—</span>
+            <span id="senderName">Seseorang</span>
+          </div>
+        </div>
+      </div>
 
-    <textarea name="answer" placeholder="Jawaban kamu..." required></textarea>
+      <button class="primary" id="openBtn">Buka surat 💌</button>
+      <button class="ghost" id="skipBtn">ehem ada pertanyaan ni, tolong dijawab yb</button>
+    </div>
+  </div>
+  
+  <!-- Main Page -->
+  <main class="wrap">
+    <header class="hero">
+      <div class="badge">💘 Valentine Day</div>
+      <h1>Selamat Hari Valentine, <span class="name">Kezia</span> ✨</h1>
+      <p class="sub">aku mau nanyaa sesuatuu…</p>
+    </header>
 
-    <button type="submit">Kirim 💌</button>
+    <section class="card">
+      <div class="qbox">
+        <div class="qtitle">Pertanyaan</div>
+        <div class="qtext">“kira kira harus ngasi apa yh ke km?”</div>
+      </div>
 
-  </form>
-</div>
+      <form id="valForm" class="form">
+        <label>Nama kamu</label>
+        <input name="from" id="from" type="text" placeholder="Tulis nama kamu..." maxlength="40" required />
 
+        <label>Jawaban kamu</label>
+        <textarea name="answer" id="answer" placeholder="Tulis jawaban kamu..." maxlength="500" required></textarea>
+
+        <button class="primary" id="sendBtn" type="submit">Kirim 💌</button>
+        <p class="status" id="status" role="status"></p>
+      </form>
+
+      <div class="mini">
+        <button class="ghost" id="reopenLetter">Buka surat lagi</button>
+      </div>
+    </section>
+
+    <footer class="footer">Made with 💖</footer>
+  </main>
+
+  <script src="script.js"></script>
 </body>
 </html>
