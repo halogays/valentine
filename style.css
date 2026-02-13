@@ -2,7 +2,6 @@
   --bg:#ffd6e6;
   --bg2:#ffe6f0;
   --card: rgba(255,255,255,.75);
-  --stroke: rgba(0,0,0,.06);
   --text:#4a1e34;
   --muted: rgba(74,30,52,.70);
   --accent:#ff3b7a;
@@ -23,6 +22,12 @@ body{
     radial-gradient(700px 420px at 80% 10%, #fff, transparent 60%),
     linear-gradient(180deg, var(--bg2), var(--bg));
   overflow-x:hidden;
+}
+
+/* ✅ KUNCI SCROLL sebelum slide selesai */
+body.lock{
+  height: 100vh;
+  overflow: hidden;
 }
 
 #fx{ position:fixed; inset:0; pointer-events:none; z-index:0; }
@@ -62,11 +67,7 @@ body{
   overflow:hidden;
 }
 
-.stickers{
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-}
+.stickers{ position:absolute; inset:0; pointer-events:none; }
 .sticker{
   position:absolute;
   filter: drop-shadow(0 8px 18px rgba(0,0,0,.12));
@@ -91,15 +92,8 @@ body{
   font-size:12px;
   letter-spacing:.8px;
 }
-.calNum{
-  font-size:44px;
-  font-weight:1000;
-  padding:6px 10px 2px;
-}
-.calHeart{
-  padding:0 10px 10px;
-  font-size:18px;
-}
+.calNum{ font-size:44px; font-weight:1000; padding:6px 10px 2px; }
+.calHeart{ padding:0 10px 10px; font-size:18px; }
 
 .photoFrame{
   width:180px;
@@ -132,26 +126,15 @@ body{
   background-clip:text;
   color:transparent;
 }
+
 .mid{
   font-size: 16px;
   color: var(--muted);
   line-height: 1.45;
   white-space: pre-wrap;
 }
-.quote{
-  font-size: 18px;
-  font-weight: 1000;
-  padding: 12px 14px;
-  border-radius: 18px;
-  border: 1px solid rgba(0,0,0,.06);
-  background: linear-gradient(90deg, rgba(255,59,122,.12), rgba(255,122,168,.10));
-}
 
-.nav{
-  display:flex;
-  gap:10px;
-  margin-top: 8px;
-}
+.nav{ display:flex; gap:10px; margin-top: 8px; }
 .btn{
   border:none;
   border-radius: 18px;
@@ -169,20 +152,11 @@ body{
   border:1px solid rgba(0,0,0,.08);
   color: var(--text);
 }
+.btn:disabled{ opacity:.6; cursor:not-allowed; }
 
-.dots{
-  display:flex;
-  gap:8px;
-  justify-content:center;
-  margin-top: 10px;
-}
-.dot{
-  width:10px; height:10px; border-radius:999px;
-  background: rgba(74,30,52,.18);
-}
-.dot.on{
-  background: linear-gradient(90deg, var(--accent), var(--accent2));
-}
+.dots{ display:flex; gap:8px; justify-content:center; margin-top: 10px; }
+.dot{ width:10px; height:10px; border-radius:999px; background: rgba(74,30,52,.18); }
+.dot.on{ background: linear-gradient(90deg, var(--accent), var(--accent2)); }
 
 .card{
   background: var(--card);
