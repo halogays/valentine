@@ -1,10 +1,10 @@
-// endpoint Formspree kamu ✅
+// ✅ endpoint Formspree kamu
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/mdaleqal";
 
-// ====== SLIDES (edit kata-kata di sini, santai aja) ======
+// ====== SLIDES (bisa kamu edit kata-katanya) ======
 const slides = [
   {
-    title: `happy valentine's dayy\n<span class="accent">kezia</span>!! 💘`,
+    title: `happy valentine's dayy <span class="accent">kezia</span>!! 💘`,
     body: `eits jangan skip 😤\naku ada sesuatu dikit wkwk`
   },
   {
@@ -12,20 +12,20 @@ const slides = [
     body: `aku tuh tiap liat kamu tuh\nkayak: “lah kok bisa ya orang se-oke ini ada” 😭💗`
   },
   {
-    title: `makasih ya`,
-    body: `makasih udah jadi orang yang bikin hari tuh lebih enak\n(serius ini bukan gombal doang)`
+    title: `serius deh`,
+    body: `hari ini aku cuma mau bilang:\nmakasih ya… beneran.`
   },
   {
-    title: `udah siap?`,
-    body: `tap lagi…\nbentar lagi ada pertanyaan 😛`
+    title: `bentar lagi last`,
+    body: `tap lagi...\nabis itu ada pertanyaan 😛`
   },
   {
-    title: `oke last`,
+    title: `oke terakhir`,
     body: `habis ini jawab ya\nbiar aku tau wkwk`
   }
 ];
 
-// ====== Render slide ======
+const stage = document.getElementById("stage");
 const slideEl = document.getElementById("slide");
 const dotsEl = document.getElementById("dots");
 const prevBtn = document.getElementById("prevBtn");
@@ -50,20 +50,15 @@ function renderDots(){
 function renderSlide(){
   const s = slides[idx];
   slideEl.innerHTML = `
-    <div class="big">${s.title}</div>
-    <div class="mid">${escapeHTML(s.body)}</div>
+    <div class="big"></div>
+    <div class="mid"></div>
   `;
   slideEl.querySelector(".big").innerHTML = s.title;
+  slideEl.querySelector(".mid").textContent = s.body;
 
   prevBtn.disabled = idx === 0;
-  prevBtn.style.opacity = idx === 0 ? .6 : 1;
-
   nextBtn.textContent = (idx === slides.length - 1) ? "lanjut →" : "tap <3";
   renderDots();
-}
-
-function escapeHTML(t){
-  return (t ?? "").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;");
 }
 
 prevBtn.addEventListener("click", () => {
@@ -78,17 +73,26 @@ nextBtn.addEventListener("click", () => {
     pop();
     renderSlide();
   } else {
-    document.querySelector(".stage").classList.add("hidden");
+    // ✅ setelah tap terakhir: buka form + buka scroll + auto scroll
+    stage.classList.add("hidden");
     formCard.classList.remove("hidden");
+    document.body.classList.remove("lock");
+
+    setTimeout(() => {
+      formCard.scrollIntoView({ behavior: "smooth", block: "start" });
+      document.getElementById("from").focus();
+    }, 120);
+
     pop(1.3);
     confettiBurst();
-    document.getElementById("from").focus();
   }
 });
 
 backToSlides.addEventListener("click", () => {
+  // balik ke slide: kunci scroll lagi
   formCard.classList.add("hidden");
-  document.querySelector(".stage").classList.remove("hidden");
+  stage.classList.remove("hidden");
+  document.body.classList.add("lock");
   pop();
 });
 
@@ -147,23 +151,19 @@ form.addEventListener("submit", async (e) => {
   }
 });
 
-// ====== little pop animation ======
+// ====== pop anim ======
 function pop(mult=1){
   slideEl.animate([
-    { transform:"scale(1)", filter:"brightness(1)" },
-    { transform:`scale(${1.02*mult})`, filter:"brightness(1.03)" },
-    { transform:"scale(1)", filter:"brightness(1)" }
+    { transform:"scale(1)" },
+    { transform:`scale(${1.02*mult})` },
+    { transform:"scale(1)" }
   ], { duration: 220, easing:"ease-out" });
 }
 
-// init
-renderSlide();
-
-// ====== Confetti ======
+// ====== confetti ======
 function confettiBurst(){
   for(let i=0;i<24;i++){
     const d = document.createElement("div");
-    d.className = "confetti";
     d.style.left = (Math.random()*100) + "vw";
     d.style.top = "-10px";
     d.style.background = Math.random()>0.5 ? "#ff3b7a" : "#ff7aa8";
@@ -176,84 +176,4 @@ function confettiBurst(){
     document.body.appendChild(d);
 
     const dur = 1200 + Math.random()*900;
-    const drift = (Math.random()*2 - 1) * 140;
-
-    d.animate([
-      { transform:"translate(0,0) rotate(0deg)", opacity: 1 },
-      { transform:`translate(${drift}px, 105vh) rotate(${420+Math.random()*360}deg)`, opacity: 0.05 }
-    ], { duration: dur, easing:"cubic-bezier(.2,.8,.2,1)" });
-
-    setTimeout(()=> d.remove(), dur+50);
-  }
-}
-
-// ====== Falling hearts/petals canvas ======
-const canvas = document.getElementById("fx");
-const ctx = canvas.getContext("2d");
-function resize(){
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-}
-window.addEventListener("resize", resize);
-resize();
-
-const items = Array.from({length: 48}, () => makeItem());
-function makeItem(){
-  return {
-    x: Math.random()*canvas.width,
-    y: -Math.random()*canvas.height,
-    s: 10 + Math.random()*18,
-    sp: 0.6 + Math.random()*1.4,
-    wob: Math.random()*Math.PI*2,
-    kind: Math.random() > 0.55 ? "heart" : "petal",
-    rot: Math.random()*Math.PI*2
-  };
-}
-
-function drawHeart(x,y,size){
-  ctx.save();
-  ctx.translate(x,y);
-  ctx.rotate(Math.sin(size)*0.2);
-  ctx.scale(size/24, size/24);
-  ctx.fillStyle = Math.random()>0.5 ? "rgba(255,59,122,.75)" : "rgba(255,122,168,.75)";
-  ctx.beginPath();
-  ctx.moveTo(0, 8);
-  ctx.bezierCurveTo(0, 0, -12, 0, -12, 8);
-  ctx.bezierCurveTo(-12, 16, 0, 20, 0, 26);
-  ctx.bezierCurveTo(0, 20, 12, 16, 12, 8);
-  ctx.bezierCurveTo(12, 0, 0, 0, 0, 8);
-  ctx.closePath();
-  ctx.fill();
-  ctx.restore();
-}
-
-function drawPetal(x,y,size,rot){
-  ctx.save();
-  ctx.translate(x,y);
-  ctx.rotate(rot);
-  ctx.fillStyle = "rgba(255,170,200,.75)";
-  ctx.beginPath();
-  ctx.ellipse(0,0, size*0.55, size*0.9, 0, 0, Math.PI*2);
-  ctx.fill();
-  ctx.restore();
-}
-
-function tick(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-
-  for(const p of items){
-    p.y += p.sp*2.2;
-    p.x += Math.sin(p.wob) * 0.6;
-    p.wob += 0.02;
-    p.rot += 0.02;
-
-    if(p.kind === "heart") drawHeart(p.x, p.y, p.s);
-    else drawPetal(p.x, p.y, p.s, p.rot);
-
-    if(p.y > canvas.height + 40){
-      Object.assign(p, makeItem(), { y: -40 });
-    }
-  }
-  requestAnimationFrame(tick);
-}
-tick();
+    const drift = (Math.random
